@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Webpage Layout</title>
+  </head>
+  <body>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      .container {
+        display: grid;
+        gap: 10px;
+        grid-template-areas:
+          "header header"
+          "sidebar main"
+          "footer footer";
+        height: 100vh;
+        grid-template-columns: 1fr 3fr;
+        grid-template-rows: auto 1fr auto;
+      }
+
+      .area {
+        background: lightblue;
+      }
+
+      .header {
+        grid-area: header;
+      }
+
+      .footer {
+        grid-area: footer;
+      }
+
+      .sidebar {
+        grid-area: sidebar;
+      }
+
+      .main {
+        grid-area: main;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .container {
+          grid-template-areas:
+            "header"
+            "sidebar"
+            "main"
+            "footer";
+          grid-template-columns: 1fr;
+          grid-template-rows: auto 0.1fr 1fr auto;
+        }
+      }
+    </style>
+
+    <div class="container">
+      <div class="area header">Header</div>
+      <div class="area sidebar">Sidebar</div>
+      <div class="area main">Main Content</div>
+      <div class="area footer">Footer</div>
+    </div>
+  </body>
+</html>

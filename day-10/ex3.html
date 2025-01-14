@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Content Card</title>
+  </head>
+  <body>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      .container {
+        display: grid;
+        gap: 10px;
+        padding: 10px;
+        grid-template-columns: repeat(3, minmax(150px, 1fr));
+      }
+
+      .box {
+        border: 1px solid lightblue;
+        height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .box h4,
+      .box p,
+      .box button {
+        margin: 5px 0;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+    <div class="container">
+      <div class="box">
+        <h4>Card 1</h4>
+        <p>This is the first card.</p>
+        <button>Read More</button>
+      </div>
+      <div class="box">
+        <h4>Card 2</h4>
+        <p>This is the 2nd card.</p>
+        <button>Read More</button>
+      </div>
+      <div class="box">
+        <h4>Card 3</h4>
+        <p>This is the 3rd card.</p>
+        <button>Read More</button>
+      </div>
+      <div class="box">
+        <h4>Card 4</h4>
+        <p>This is the 4th card.</p>
+        <button>Read More</button>
+      </div>
+      <div class="box">
+        <h4>Card 5</h4>
+        <p>This is the 5th card.</p>
+        <button>Read More</button>
+      </div>
+      <div class="box">
+        <h4>Card 6</h4>
+        <p>This is the last card.</p>
+        <button>Read More</button>
+      </div>
+    </div>
+  </body>
+</html>
