@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+
+      .d-flex {
+        display: flex;
+      }
+
+      nav {
+        justify-content: space-between;
+        background-color: black;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      nav div li {
+        margin: 0.5rem;
+        color: white;
+      }
+
+      .dashboard {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .sidebar li {
+        padding-top: 1.5rem;
+        padding-left: 1.5rem;
+        color: white;
+      }
+
+      .analytics {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin: 0.5rem;
+        border: 1px solid lightblue;
+        background-color: lightblue;
+        height: 3rem;
+        border-radius: 1rem;
+      }
+
+      .chart {
+        margin: 0.5rem;
+      }
+
+      .chart-placeholder {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid lightblue;
+        width: 100%;
+        height: 10rem;
+        border-radius: 1rem;
+        background-color: rgb(248, 238, 224);
+      }
+
+      .table table {
+        margin-top: 1rem;
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        border: 1px solid black;
+        padding: 0.5rem;
+        text-align: left;
+      }
+
+      th {
+        background-color: lightblue;
+      }
+
+      section {
+        margin-top: 1.5rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+
+      #menu-toggler img {
+        width: 1.5rem;
+      }
+
+      .profile-picture {
+        width: 2rem;
+        border-radius: 50%;
+      }
+
+      li:hover {
+        color: red;
+      }
+
+      @media screen and (min-width: 576px) {
+        #menu-toggler {
+          display: block;
+        }
+
+        nav ul {
+          flex-direction: column;
+        }
+
+        .sm-d-none {
+          display: none;
+        }
+
+        .analytics {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media screen and (min-width: 768px) {
+        .sidebar {
+            display: none;
+        }
+      }
+
+      @media screen and (min-width: 768px) {
+        .sm-d-none {
+          display: flex;
+          flex-direction: row;
+        }
+
+        #menu-toggler {
+          display: none;
+        }
+
+        .dashboard {
+          grid-template-columns: 15% 85%;
+        }
+
+        .sidebar {
+          display: block;
+          background-color: black;
+        }
+
+        .sidebar,
+        .main-content {
+          height: 100vh;
+        }
+      }
+    </style>
+
+    <header>
+      <nav class="d-flex">
+        <div>
+          <button id="menu-toggler">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1200px-Hamburger_icon.svg.png"
+              alt="menu icon"
+            />
+          </button>
+          <ul class="d-flex sm-d-none">
+            <li>Home</li>
+            <li>About</li>
+            <li>Contact</li>
+          </ul>
+        </div>
+        <div>
+          <img
+            class="profile-picture"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAABSpJREFUWEfNWH1MlVUY/x3uBbyFWejUSEZKH2IL25gJWupK25pZrlXGoBJaqKhlNUtatcKwNcNGpElOqzlaiUEbYYqZtEy2LMvZjDXL4VxNcIFwxQtkt533vl/nvOc957z0T+9fcM9znvN7fs/nOaSrojEO66N/Efu//8UfxA2QYnPQuvFZqK1Vf0neKn1JMR+kq6IpTmHxEChSQjjAJsP2oRzj/xWMCCLDoJ9PgwHyg2n+7jbKJ6TcGjiArHLxUYKDAkRrUJZNgHrbCAjiPlGqg1F1imjdC1Ajkz3xqoNuJDI0D5gy41Lia61lAJ8wxl4JRxqGW8dzMZjIYqly0WqAA1nymOMFhY2NcUkWqyJGWBR8K6mKAN8K4udiZclRxRTP8AgZFzIo4q6j+zR+6T7NwMoZn4Wp4zIlUAmOn/0dv/31B1JCYSQnhZEcCiF34hSkR65gAse3eooZ5MTjQMuv7Shp3MiAyRg9Ft+W1eLylFFCkD0X+5G3ZTmiQzHb9WkpERwqext0r/ejrYumrrNiMKgbbeXNNdj989eM3uW3LkLlnSVCgCuba9DAyW9Z9BQeuGmuciixMGm1usTpBOdj/SioW41zA+cZ97Q8sgEzJk1lQLae/B7FDRuY3+7LmY1ti59VRa+5nmgLkk4ibmltp37CQx9XModkp2fg4OObMCqcYgDvjfVjlm1IQnTcZWOMcLgqkuYBKPMgy6Bmpq1r3Y4dR1sAV3A8M/tBrJtTaJTUNV9sxkfHDjBAdhe+gjnX5irZ48FKY9ARZpvbhaEY5m1/Gp29ZxlXHyitRle0B4W7XmN+XzbjHqyfX+oPjhpKfCZR7TrItbgjZzqwcOcLruZGkDE6HX2DA4gOXbTBUPd/VVqNSHKqkj0r1hMjSYIe/yRhBlZxlFS11aOm/VPhwdYOyurNEybLurQYuNXrtRkUqBm6NIy7PngOJ7o6XauOMS/OK8aTBfdrMueqfa6G6R1Y3YVSEhuGujhworvTiEfrs+DlXXMDmourEE4KBQbo3iCdqHU0n+r5EzO3rvSYP3fydOx6+GWQOPHebexKx955qGycSxZ5oRaVHVey/B2/hMX1L+G7Mx3msMLG6lsLy1GUO99rp6qcudbtW50OW7wb32lvQmXbTo973bqOrHgXWVdOMKqIUTYDfgFaHauZJoYVexZvaakRRAedEkNpzc/MQVNRJUIkKSA0s+gYWWxQardnJ4d8XDz8zzAWcNlLp5TDy2pRfagBH/64jwHz6h1LsWLmvQKA6jHFZlAt6uj31D8CbLq7HMXTF6Bv8ALyt5bj3ECfscHS+80TNbhROjsyuWuTJHCxq8EZccNCtzqIW11+5jR8VrQeSRQOAUQDRe7EbOx59HWkhsJ2l7BKFfMeZHtN1UkEDmF7sCNwuKwW142dZFpNxyRgzZ7NqD/2JQghiNPaCmDtbUuw9vYlylg0oJmdjHRXNJrblfvw/L738P7RvYyg0y1YpntjUcyqW+Vx9d7H3kBexvWC6z/vOXeSqLEJ3TZtfBb2l7yJZKtbcEm1/+QPKGqoYrSrhgfhuCXCxwsW1K0yLj+mXYY7W5duxC1XZ0vv1Ks/r8Unxw8yt046etERzLqOm9EmvLIyz29GpKiqvAbbgURk3Yqazj5gmo9DUpDSAV1ycRfDZh+knFudnSiBxi3Ro2YQujTeBnl1bC/mapCwTmkCClL4ZSrVvdjjbv+jEwPByKGJdiYABqDenkoC7NEkXSimZjCwdvYGqL3dJzH/BaNeRcfWD24sAAAAAElFTkSuQmCC"
+            alt="Profile Picture"
+          />
+        </div>
+      </nav>
+    </header>
+
+    <div class="dashboard">
+      <aside class="sidebar">
+        <ul>
+          <li>Dashboard</li>
+          <li>Users</li>
+          <li>Reports</li>
+          <li>Settings</li>
+        </ul>
+      </aside>
+
+      <main class="main-content">
+        <section class="analytics">
+          <div class="card">Total Users: 1,234</div>
+          <div class="card">Revenue: $12,345</div>
+          <div class="card">New Signups: 234</div>
+          <div class="card">Active Users: 567</div>
+        </section>
+        <section class="chart">
+          <h2>Analytics Chart</h2>
+          <div class="chart-placeholder">Chart Placeholder</div>
+        </section>
+        <section class="table">
+          <h2>Recent Transactions</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>User</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>2024-01-01</td>
+                <td>John Doe</td>
+                <td>$123</td>
+                <td>Completed</td>
+              </tr>
+              <tr>
+                <td>2024-01-02</td>
+                <td>Jane Smith</td>
+                <td>$456</td>
+                <td>Pending</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+    <script>
+      const toggleButton = document.querySelector("#menu-toggler");
+      const menu = document.querySelector("nav ul");
+      toggleButton.addEventListener("click", function () {
+        menu.classList.toggle("sm-d-none");
+      });
+    </script>
+  </body>
+</html>
