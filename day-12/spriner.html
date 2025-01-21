@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taichi Circle</title>
+  </head>
+  <body>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      .taichi-overlay {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 95vh;
+      }
+
+      .taichi {
+        width: 150px;
+        height: 150px;
+        background: lightblue;
+        border-radius: 50%;
+        border: 2px solid black;
+        animation: taichi-rotate 6s infinite linear;
+      }
+
+      .white {
+        height: 50%;
+        background: white;
+        border-top-left-radius: 50% 100%;
+        border-top-right-radius: 50% 100%;
+        position: relative;
+      }
+
+      .white::before {
+        content: '';
+        width: 50%;
+        height: 50%;
+        background: black;
+        position: absolute;
+        bottom: 0;
+        border-top-left-radius: 50% 100%;
+        border-top-right-radius: 50% 100%;
+      }
+
+      .black {
+        height: 50%;
+        background: black;
+        border-bottom-left-radius: 50% 100%;
+        border-bottom-right-radius: 50% 100%;
+        position: relative;
+      }
+
+      .black::before {
+        content: '';
+        width: 50%;
+        height: 50%;
+        background: white;
+        position: absolute;
+        right: 0;        
+        border-bottom-left-radius: 50% 100%;
+        border-bottom-right-radius: 50% 100%;
+      }
+
+      @keyframes taichi-rotate {
+        from {
+          transform: rotate(0);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+
+    <div class="taichi-overlay">
+      <div class="taichi">
+        <div class="white"></div>
+        <div class="black"></div>
+      </div>
+    </div>
+  </body>
+</html>

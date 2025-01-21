@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        .gallery-overlay {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+            
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 0.5rem;
+            width: 30rem;
+            height: 30rem;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 100%;
+            transition: all 0.5s ease-in;
+        }
+
+        .gallery .img-one.fullscreen img {
+            transform-origin: top left;
+            transform: scale(3.2);
+        }
+
+        .gallery .img-two.fullscreen img {
+            transform-origin: top center;
+            transform: scale(3.2);
+        }
+    </style>
+
+    <div class="gallery-overlay">
+        <div class="gallery">
+            <div class="img-one"><img src="https://100dayscss.com/codepen/40-1.jpg" alt=""></div>
+            <div class="img-two"><img src="https://100dayscss.com/codepen/40-2.jpg" alt=""></div>
+            <div class="img-three"><img src="https://100dayscss.com/codepen/40-3.jpg" alt=""></div>
+            <div class="img-four"><img src="https://100dayscss.com/codepen/40-4.jpg" alt=""></div>
+            <div class="img-five"><img src="https://100dayscss.com/codepen/40-5.jpg" alt=""></div>
+            <div class="img-six"><img src="https://100dayscss.com/codepen/40-6.jpg" alt=""></div>
+            <div class="img-seven"><img src="https://100dayscss.com/codepen/40-7.jpg" alt=""></div>
+            <div class="img-eight"><img src="https://100dayscss.com/codepen/40-8.jpg" alt=""></div>
+            <div class="img-nine"><img src="https://100dayscss.com/codepen/40-9.jpg" alt=""></div>
+        </div>
+    </div>
+    <script>
+        const imgOne = document.querySelector('.img-one');
+        imgOne.addEventListener('click', function(){
+            imgOne.classList.toggle('fullscreen');
+        });
+
+        const imgTwo = document.querySelector('.img-two');
+        imgTwo.addEventListener('click', function(){
+            imgTwo.classList.toggle('fullscreen');
+        });
+    </script>
+</body>
+</html>
