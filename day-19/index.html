@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+        }
+
+        .circle {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .shadow {
+            opacity: 0.5;
+        }
+    </style>
+    <div class="container"></div>
+    <script>
+        const container = document.querySelector('.container');
+        let currentCircle = null;
+        let shadowCircles = [];
+
+        function generateRandomColour() {
+            const hexaString = '0123456789ABCDE';
+            let colour = '#';
+
+            for (let index = 0; index < 6; index++) {
+                const colourChar = hexaString[Math.floor(Math.random() * 16)];
+                colour += colourChar;
+            }
+
+            return colour;
+        }
+
+
+        function Circle(left, top, isShadow = false) {
+            this.left = left;
+            this.top = top;
+            this.colour = generateRandomColour();
+            this.htmlElement = null;
+
+            this.generateHTML = () => {
+                const circle = document.createElement('div');
+                circle.classList.add('circle');
+
+                if (isShadow) {
+                    circle.classList.add('shadow');
+                }
+
+                circle.style.top = (this.top - 40) + 'px';
+                circle.style.left = (this.left - 40) + 'px';
+                circle.style.background = this.colour;
+
+                container.appendChild(circle);
+                this.htmlElement = circle;
+            };
+
+            this.move = (left, top) => {
+                this.colour = generateRandomColour();
+                this.htmlElement.style.background = this.colour;
+                this.htmlElement.style.left = (left - 40) + 'px';
+                this.htmlElement.style.top = (top - 40) + 'px';
+            }
+        }
+
+        document.addEventListener('mousedown', (e) => {
+            const circle = new Circle(e.clientX, e.clientY);
+            circle.generateHTML();
+            currentCircle = circle;
+
+            for (let index = 0; index < 3; index++) {
+                const shadowCircle = new Circle(e.clientX, e.clientY, true);
+                shadowCircle.generateHTML();
+                shadowCircles.push(shadowCircle);
+            }
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (currentCircle) {
+                currentCircle.move(e.clientX, e.clientY);
+                if (shadowCircles) {
+                    shadowCircles.forEach((shadowCircle, index) => {
+                        setTimeout(() => {
+                            shadowCircle.move(e.clientX, e.clientY);
+                        }, index * 50);
+                    });
+                }
+            }
+        });
+
+        document.addEventListener('mouseup', (e) => {
+            if (currentCircle) {
+                currentCircle.htmlElement.remove();
+            }
+
+            if (shadowCircles) {
+                shadowCircles.forEach((shadowCircle) => {
+                    shadowCircle.htmlElement.remove();
+                });
+            }
+            shadowCircles = [];
+        });
+    </script>
+</body>
+</html>
