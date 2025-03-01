@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas Demo</title>
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .toolBox {
+            width: 100%;
+            height: 5rem;
+            background: #f0f0f0;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .colour-table {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .colour-table div {
+            width: 2rem;
+            height: 2rem;
+            cursor: pointer;
+        }
+
+        #myCanvas {
+            border: 1px solid #000000;
+            flex-grow: 1;
+            cursor: crosshair;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="toolBox">
+        <div class="clearbutton">
+            <button id="clearAll">Clear</button>
+        </div>
+        <div class="line-width">
+            <span>Line Width </span>
+            <select name="line-width" id="line-width">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="colour-table">
+            <span>Color</span>
+            <div style="background: #FF0000;" data-colour="#FF0000"></div>
+            <div style="background: #00FF00;" data-colour="#00FF00"></div>
+            <div style="background: #0000FF;" data-colour="#0000FF"></div>
+            <div style="background: #FFFF00;" data-colour="#FFFF00"></div>
+            <div style="background: #FF00FF;" data-colour="#FF00FF"></div>
+            <div style="background: #00FFFF;" data-colour="#00FFFF"></div>
+            <div style="background: #000000;" data-colour="#000000"></div>
+            <div style="background: #FFFFFF;" data-colour="#FFFFFF"></div>
+            <div style="background: #808080;" data-colour="#808080"></div>
+            <div style="background: #800000;" data-colour="#800000"></div>
+        </div>
+        <div class="colour-picker">
+            <input type="color" id="stroke-colour" value="#000000">
+        </div>
+        <div class="eraser-tool">
+            <button id="eraser">Eraser</button>
+        </div>
+        <div class="undo">
+            <button id="undo">Undo</button>
+        </div>
+        <div class="redo">
+            <button id="redo">Redo</button>
+        </div>
+    </div>
+
+    <canvas id="myCanvas"></canvas>
+
+    <script src="index.js"></script>
+</body>
+</html>
